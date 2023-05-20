@@ -1,0 +1,8 @@
+.container{
+    max-width: 970px;
+    margin: auto;
+}
+.App{
+   display: flex;
+   justify-content: space-between;
+}

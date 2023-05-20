@@ -1,0 +1,56 @@
+.task-show {
+  
+  border: 1px solid #363636;
+  width: 400px;
+  font-size: 14px;
+  padding: 0 20px;
+  background: #363636;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.task-show-create{
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.taskShow-title {
+  margin: 4px;
+  text-decoration: underline;
+  color: #181818;
+  font-style: italic;
+}
+
+.taskShow-title-under{
+  text-decoration:line-through;
+  color: #181818;
+  font-style: italic;
+  margin: 4px;
+
+
+}
+
+.taskShow-description {
+  margin: 10px 4px;
+  text-decoration:none;
+
+}
+
+.taskShow-description-under {
+  margin: 10px 4px;
+  text-decoration:line-through;
+
+}
+.taskShow-Button {
+  border: none;
+  background-color: #363636;
+  margin: 4px;
+  cursor: pointer;
+}
+
+
+.taskShow-checkbox{
+  accent-color:  #1a1a1a;
+
+}

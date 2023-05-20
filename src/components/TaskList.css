@@ -1,0 +1,9 @@
+.task-list-title{
+    width: 450px;
+}
+
+.task-list-underTitle{
+    color: white;
+    font-size: 15px;
+    font-style: italic;
+}
