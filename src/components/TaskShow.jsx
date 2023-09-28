@@ -1,18 +1,15 @@
 import TaskCreate from "./TaskCreate";
 import "./TaskShow.css";
 import { useState } from "react";
-import {useContext } from "react";
-import TasksContext from "../context/tasks";
 
-function TaskShow({task, onUpdate}) {
-  const { deleteTaskById, updatedTaskById } = useContext(TasksContext);
-
+function TaskShow({ task, onDelete, onUpdated }) {
+  console.log(task);
   const [showEdit, setShowEdit] = useState(false);
   const [checkInput, setCheckInput] = useState(
     task.status === "completed" ? true : false
   );
   const taskDeleting = () => {
-    deleteTaskById(task.id);
+    onDelete(task.id);
   };
 
   const uptadeTask = () => {
@@ -21,12 +18,12 @@ function TaskShow({task, onUpdate}) {
 
   const handleUpdateSubmit = (id, updatedTaskTitle, updatedTaskDescription) => {
     setShowEdit(false);
-    updatedTaskById(id, updatedTaskTitle, updatedTaskDescription);
+    onUpdated(id, updatedTaskTitle, updatedTaskDescription);
   };
 
   const switchInput = () => {
     setCheckInput(!checkInput);
-    updatedTaskById(
+    onUpdated(
       task.id,
       task.taskTitle,
       task.taskDescription,

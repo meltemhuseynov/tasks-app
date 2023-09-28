@@ -1,11 +1,7 @@
 import TaskShow from "./TaskShow";
 import "./TaskList.css";
-import {useContext } from "react";
-import TasksContext from "../context/tasks";
 
-function TaskList() {
-  const { tasks } = useContext(TasksContext);
-
+function TaskList({ tasks, onDelete, onUpdated }) {
   if (tasks.length == 0) {
     return (
       <div className="task-list">
@@ -24,7 +20,8 @@ function TaskList() {
           <TaskShow
             key={index}
             task={task}
-        
+            onDelete={onDelete}
+            onUpdated={onUpdated}
           />
         );
       })}
