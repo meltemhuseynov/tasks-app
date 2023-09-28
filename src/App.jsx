@@ -1,44 +1,38 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 import TaskCreate from "./components/TaskCreate";
 import TaskList from "./components/TaskList";
-import axios from 'axios'
+import { useEffect } from "react";
 
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  const createTasks = async (taskTitle, taskDescription) => {
-    const response= await axios.post('http://localhost:3000/tasks',{
-      taskTitle: taskTitle,
-      taskDescription: taskDescription,
-      status: "pending",
-    })
-    const createdTask = [...tasks, response.data];
-    console.log(response)
-    setTasks(createdTask);
+  const createTasks = (taskTitle, taskDescription) => {
+    const createdTask = [
+      ...tasks,
+      {
+        id: tasks.length + 1,
+        taskTitle: taskTitle,
+        taskDescription: taskDescription,
+        status: "pending",
+      },
+    ];
+    setData(createdTask);
   };
 
-  const deleteTaskById = async (id) => {
-    await axios.delete(`http://localhost:3000/tasks/${id}`)
+  const deleteTaskById = (id) => {
     const afterDeletingTask = tasks.filter((task) => {
       return task.id !== id;
     });
-    setTasks(afterDeletingTask);
+    setData(afterDeletingTask);
   };
 
-  const updatedTaskById = async (
+  const updatedTaskById = (
     id,
     updatedTaskTitle,
     updatedTaskDescription,
     status
   ) => {
-    await axios.put(`http://localhost:3000/tasks/${id}`,{
-      taskTitle: updatedTaskTitle,
-      taskDescription: updatedTaskDescription,
-      status: status
-
-    })
-
     const uptatedTask = tasks.map((task) => {
       if (task.id === id) {
         return {
@@ -52,19 +46,27 @@ function App() {
       }
     });
 
-    setTasks(uptatedTask);
+    setData(uptatedTask);
   };
 
-  const fetchData= async()=>{
-    const response= await axios.get('http://localhost:3000/tasks')
-    setTasks(response.data)
-  }
+  const setData = (data) => {
+    localStorage.setItem("tasks", JSON.stringify(data));
+    loadData();
+  };
 
-  useEffect(()=>{
-    fetchData();
-  },[])
+  const loadData = () => {
+    const item = JSON.parse(localStorage.getItem("tasks"));
 
+    if (item) {
+      setTasks(item);
+    }
+  };
 
+  const onStatusChange = (task) => {};
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <>
